@@ -1,0 +1,41 @@
+doctype html
+html(ng-app='starterApp')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Registro de Inicio
+    link(rel='stylesheet', href='/fonts/fonts.css')
+    link(rel='stylesheet', href='/components/normalize-css/normalize.css')
+    link(rel='stylesheet', href='/components/icomoon-bower/style.css')
+    link(rel='stylesheet', href='/components/material-design-lite/material.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    .mdl-grid
+      .demo-card-wide.mdl-card.mdl-shadow--3dp(ng-controller='mainController')
+        .mdl-card__title
+          // <h2 class="mdl-card__title-text">Registro de Inicio</h2>
+        form(name='loginForm', ng-submit='login(credentials)', novalidate='')
+          .container
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#username.mdl-textfield__input(type='email', ng-model='credentials.username')
+              label.mdl-textfield__label(for='username')
+                i.icomoon.icon-user
+                |  Correo:
+              span.mdl-textfield__error Correo
+            .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+              input#password.mdl-textfield__input(type='password', ng-model='credentials.password')
+              label.mdl-textfield__label(for='password')
+                i.icomoon.icon-lock
+                |  Contraseña:
+            label.mdl-checkbox.mdl-js-checkbox.mdl-js-ripple-effect(for='remember')
+              input#remember.mdl-checkbox__input(type='checkbox', ng-model='credentials.remember')
+              span.mdl-checkbox__label Recordar
+            .space
+            button.mdl-button--colored.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect(ng-disabled='!loginForm.$valid', type='submit')
+              span(ng-show="sendButtonText == 'Verificar'")
+              | {{ sendButtonText }}
+    script(src='/components/angular/angular.min.js')
+    script(src='/components/angular-route/angular-route.min.js')
+    script(src='/components/material-design-lite/material.min.js')
+    script(src='/primus/primus.io.js')
+    script(src='/javascripts/app.js')

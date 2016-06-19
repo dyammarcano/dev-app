@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="starterApp">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Registro de Inicio</title>
+  <link rel="stylesheet" href="/fonts/fonts.css">
+  <link rel="stylesheet" href="/components/normalize-css/normalize.css">
+  <link rel="stylesheet" href="/components/icomoon-bower/style.css">
+  <link rel="stylesheet" href="/components/material-design-lite/material.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  
+  <div class="mdl-grid">
+
+    <div class="demo-card-wide mdl-card mdl-shadow--3dp" ng-controller="mainController">
+      <div class="mdl-card__title">
+        <!-- <h2 class="mdl-card__title-text">Registro de Inicio</h2> -->
+      </div>
+      <form name="loginForm" ng-submit="login(credentials)" novalidate>
+
+        <div class="container">
+          
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="email" ng-model="credentials.username" id="username" />
+            <label class="mdl-textfield__label" for="username"><i class="icomoon icon-user"></i> Correo:</label>
+            <span class="mdl-textfield__error">Correo</span>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" ng-model="credentials.password" id="password" />
+            <label class="mdl-textfield__label" for="password"><i class="icomoon icon-lock"></i> Contraseña:</label>
+          </div>
+
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="remember">
+            <input type="checkbox" id="remember" ng-model="credentials.remember" class="mdl-checkbox__input">
+            <span class="mdl-checkbox__label">Recordar</span>
+          </label>
+
+          <div class="space"></div>
+
+          <button ng-disabled="!loginForm.$valid" type="submit" class="mdl-button--colored mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><span ng-show="sendButtonText == 'Verificar'"></span>{{ sendButtonText }}</button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="/components/angular/angular.min.js"></script>
+  <script src="/components/angular-route/angular-route.min.js"></script>
+  <script src="/components/material-design-lite/material.min.js"></script>
+  <script src="/primus/primus.io.js"></script>
+  <script src="/javascripts/app.js"></script>
+</body>
+</html>

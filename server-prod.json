@@ -1,0 +1,8 @@
+﻿{
+    "apps": [{
+        "name"       : "webApp",
+        "script"     : "./src",
+        "instances"  : "1",
+        "exec_mode"  : "cluster"
+    }]
+}

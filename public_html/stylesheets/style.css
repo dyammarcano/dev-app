@@ -1,0 +1,56 @@
+body {
+  background: #ece6de;
+  font-family: "Roboto", sans-serif;
+  background-image: linear-gradient(to bottom, #ece6de, #ece6de 70%, #fff 70%, #fff);
+  background-size: cover;
+  background-repeat: no-repeat
+}
+
+html, body {
+  margin: 0;
+  height: 100%
+}
+
+.demo-card-wide {
+  margin: 0 auto 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.demo-card-wide .mdl-card {
+  width: 350px;
+  padding: 40px 30px;
+  background: #fff;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+
+}
+
+.space {
+  padding-top: 20px;
+}
+
+button {
+  width: 280px;
+}
+
+.container {
+  padding: 25px 25px 50px;
+}
+
+.demo-card-wide > .mdl-card__title {
+  color: white;
+  height: 200px;
+  background: url('/images/3846_eurobuilding_hotel_&_suites_guayana_6398.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__menu {
+  color: white;
+}
