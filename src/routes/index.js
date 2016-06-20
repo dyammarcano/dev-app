@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.use(require('./login'));
+router.use(require('./get'));
+router.use(require('./post'));
 
 router.get('/', function(request, response, next) {
 	return response.render('homepage', {});

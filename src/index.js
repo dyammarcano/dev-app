@@ -78,11 +78,40 @@ var web = primus.channel('web');
 web.on("connection", function(spark) {
   console.log('web client connect whit id: ' + spark.id);
 
-  spark.on('authenticate', function(data) {
-    console.log('data: ' + data.username);
+  spark.on('register', function(data) {
+    Account.register(new Account({
+      username: data.username,
+    }), data.password, function register(err, account) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(account);
+        passport.authenticate('local', {})(req, res, function(err, user) {
+          console.log('register success');
+        });
+      }
+    });
+  });
 
-    if (data.username === 'dyam.adm.com') {
-      spark.send('authenticate', true);
+  spark.on('authenticate', function(data) {
+    username = data.username;
+    password = data.password;
+    console.log('username: ' + username + ' password: ' + password);
+    function authenticate(username, password, done) {
+      User.findOne({ username: username }, function(err, user) {
+        if (err) { 
+          return done(err); 
+        }
+        if (!user) {
+          console.log('Incorrect username.');
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        if (!user.validPassword(password)) {
+          console.log('Incorrect password.');
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, user);
+      });
     }
   });
 

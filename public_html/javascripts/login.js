@@ -24,17 +24,38 @@ web.on('end', function end() {
 
 var app = angular.module('loginApp', ['ui.materialize']);
 
-app.controller('mainController', function mainController($scope, $timeout) {
-  $scope.credentials = {username: '', password: '', remember: false};
+app.controller('mainController', function mainController($scope, $timeout, $http) {
+  $scope.credentials = {
+    username: '',
+    password: '',
+    remember: false
+  };
   $scope.sendButtonText = "Entrar";
 
-  $scope.login = function (credentials) {
-    console.log(credentials);
-    web.send('authenticate', credentials);
-    $scope.sendButtonText = "Verificar";
+  $scope.login = function(credentials) {
+    //console.log(credentials);
+    $http({
+      method: 'POST',
+      url: "/api/login",
+      data: $.param(credentials),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+    .success(function(data) {
+      console.log('data: ' + data);
 
-    $timeout(function() {
-      $scope.sendButtonText = "Entrar";
-    }, 2000);
+      if (!data.success) {
+        console.log('errors: ' + data.errors);
+      } else {
+        console.log('message: ' + data.message);
+      }
+    });
   };
+
+  $scope.sendButtonText = "Verificar";
+
+  $timeout(function() {
+    $scope.sendButtonText = "Entrar";
+  }, 2000);
 });
