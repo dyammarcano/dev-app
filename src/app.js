@@ -14,7 +14,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(favicon(path.join(__dirname, '../public_html', 'logo.png')));
+//app.use(favicon(path.join(__dirname, '../public_html', 'favicon.ico')));
 app.use(cors());
 app.use(compress());
 app.use(logger('dev'));

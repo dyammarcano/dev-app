@@ -25,6 +25,9 @@
     "Materialize": "materialize#^0.97.6",
     "jquery": "^3.0.0",
     "modernizr-min": "^3.2.0",
-    "font-awesome": "fontawesome#^4.6.3"
+    "font-awesome": "fontawesome#^4.6.3",
+    "normalize-css": "normalize.css#^4.1.1",
+    "materialize-clockpicker": "*",
+    "angular-favicon": "^0.3.2"
   }
 }

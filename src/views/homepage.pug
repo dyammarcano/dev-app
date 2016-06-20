@@ -5,30 +5,67 @@ html(ng-app='homeApp')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title Inicio
-    link(rel='stylesheet', href='/stylesheets/homepage.css')
+    link(rel='stylesheet', href='/components/normalize-css/normalize.css')
+    link(rel='stylesheet', href='/fonts/fonts.css')
+    link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', href='/components/Materialize/dist/css/materialize.min.css')
+    link(rel='stylesheet', href='/components/materialize-clockpicker/dist/css/materialize.clockpicker.css')
+    link(rel='stylesheet', href='/stylesheets/homepage.css')
 
     script(type='text/javascript', src='/components/modernizr-min/dist/modernizr.min.js')
     script(type='text/javascript', src='/components/jquery/dist/jquery.min.js')
     script(type='text/javascript', src='/components/angular/angular.min.js')
+    script(type='text/javascript', src='/components/angular-route/angular-route.min.js')
     script(type='text/javascript', src='/components/Materialize/dist/js/materialize.min.js')
+    script(type='text/javascript', src='/components/materialize-clockpicker/dist/js/materialize.clockpicker.js')
     script(type='text/javascript', src='/components/angular-materialize/src/angular-materialize.js')
+    script(type='text/javascript', src='/primus/primus.io.js')
     script(type='text/javascript', src='/javascripts/homepage.js')
   body
-    main
-      .container(ng-controller='mainController')
-        .row
-          .section.col.s4
-            div(input-field='')
-              select(ng-model='select.value', material-select='')
-                option(ng-repeat='value in select.choices') {{value}}
-          .section.col.s8
-            h5
-              | You selected: 
-              b {{select.value}}
-        input-field
-          input(type='text', ng-model='dummyInputs.inputFieldInput')
-          label Input label
-        input-field
-          textarea.materialize-textarea(ng-model='dummyInputs.textAreaInput')
-          label Textarea
+    div.container(ng-controller='mainController')
+      div.row
+        div.section.col.s4
+          div(input-field='')
+            select(ng-model='select.value', material-select='')
+              option(ng-repeat='value in select.choices') {{value}}
+        div.section.col.s8
+          h5
+            | You selected: 
+            b {{select.value}}
+      input-field
+        input(type='text', ng-model='dummyInputs.inputFieldInput')
+        label Input label
+      input-field
+        textarea.materialize-textarea(ng-model='dummyInputs.textAreaInput')
+        label Textarea
+      label(for='inputCreated') Input date
+      input#inputCreated(input-date='', type='text', name='created', ng-model='currentTime', container='body', format='dd/mm/yyyy', months-full='{{ month }}', months-short='{{ monthShort }}', weekdays-full='{{ weekdaysFull }}', weekdays-short='{{ weekdaysShort }}', weekdays-letter='{{ weekdaysLetter }}', disable='disable', min='{{ minDate }}', max='{{ maxDate }}', today='today', clear='clear', close='close', select-years='15', on-start='onStart()', on-render='onRender()', on-open='onOpen()', on-close='onClose()', on-set='onSet()', on-stop='onStop()')
+      label(for='input_starttime') Time
+      input#input_starttime(input-clock='', data-twelvehour='false', type='text')
+
+      ul.collapsible.popout(data-collapsible='accordion', watch='')
+        li(ng-repeat='single in collapsibleElements')
+          div.collapsible-header
+            i(class='{{single.icon}}')
+            | {{single.title}}
+          div.collapsible-body
+            p {{single.content}}
+      div.col.s8(ng-if='showTooltip')
+        //- data-position can be : bottom, top, left, or right
+        //- data-delay controls delay before tooltip shows (in milliseconds)
+        a.btn.col.s4.offset-s4.l2.offset-l1(tooltipped='', data-position='bottom', data-delay='50', data-tooltip='I am tooltip')  Bottom
+        a.btn.col.s4.offset-s4.l2.offset-l1(tooltipped='', data-position='top', data-delay='150', data-tooltip='I am tooltip')  Top
+        a.btn.col.s4.offset-s4.l2.offset-l1(tooltipped='', data-position='left', data-delay='250', data-tooltip='I am tooltip')  Left
+        a.btn.col.s4.offset-s4.l2.offset-l1(tooltipped='', data-position='right', data-delay='550', data-tooltip='I am tooltip')  Right
+      // Modal Trigger
+      div.col
+        a.btn(href='#demoModal', modal='') Show Modal
+      // Modal Structure
+      #demoModal.modal
+        div.modal-content
+          h4 Modal header
+          p A bunch of text
+        div.modal-footer
+          a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='#!') Agree
+
+
