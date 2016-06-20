@@ -27,15 +27,8 @@ router.post('/api/login', passport.authenticate('local'), function(request, resp
 });
 */
 
-router.post('/api/signup', passport.authenticate('local-signup', {
-  successRedirect: '/profile',
-  failureRedirect: '/signup',
-  failureFlash: true,
-})); 
-router.post('/api/login', passport.authenticate('local-login', {  
-  successRedirect: '/profile',
-  failureRedirect: '/login',
-  failureFlash: true,
-}));
+router.post('/api/signup', passport.authenticate('signup'));
+
+router.post('/api/login', passport.authenticate('login'));
 
 module.exports = router; 

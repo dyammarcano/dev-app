@@ -12,9 +12,15 @@ var cors          = require('cors');
 var flash         = require('connect-flash');  
 var passport      = require('passport');
 var mongoose      = require('mongoose');
-var LocalStrategy = require('passport-local').Strategy;
+//var LocalStrategy = require('passport-local').Strategy;
 var routes        = require('./routes');
 var Account       = require('./models/account');
+
+mongoose.connect(process.env.DB, function(error) {
+  if (error) {
+    console.log('Could not connect to mongodb on localhost.');
+  }
+});
 
 var app = express();
 
@@ -35,29 +41,23 @@ app.use(express.static(path.join(__dirname, '../public_html')));
 app.use(flash());
 
 app.use(require('express-session')({
-  secret: 'This is a secret',
+  secret: process.env.SECRET,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
   },
   store: new sessionStore({
-    uri: 'mongodb://localhost/eurobuilding',
+    uri: process.env.DB,
     collection: 'sessions'
   }),
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb://localhost/eurobuilding', function(err) {
-  if (err) {
-    console.log('Could not connect to mongodb on localhost.');
-  }
-});
+require('./controllers/passport')(passport);
 
 app.use('/', routes);
-
-require('./controllers/passport')(passport);
 
 module.exports = app;

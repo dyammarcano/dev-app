@@ -26,8 +26,8 @@ var app = angular.module('loginApp', ['ui.materialize']);
 
 app.controller('mainController', function mainController($scope, $timeout, $http) {
   $scope.credentials = {
-    username: '',
-    password: '',
+    email: 'dyam@dyam.com',
+    password: 'admin',
     remember: false
   };
   $scope.sendButtonText = "Entrar";
