@@ -23,6 +23,10 @@ html(ng-app='homeApp')
     script(type='text/javascript', src='/javascripts/homepage.js')
   body
     div.container(ng-controller='mainController')
+      h4
+        | status: 
+        small#status disconnected
+
       div.row
         div.section.col.s4
           div(input-field='')

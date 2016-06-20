@@ -22,6 +22,14 @@ web.on('end', function end() {
   console.log('Connection closed');
 });
 
+web.on('open', function open() {
+  status.textContent = 'connected';
+});
+
+web.on('close', function close() {
+  status.textContent = 'disconnected';
+});
+  
 var app = angular.module('homeApp', ['ui.materialize']);
 
 app.controller('mainController', function mainController($scope, $timeout) {
