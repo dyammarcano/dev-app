@@ -1,13 +1,8 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
 require('dotenv').config();
 
 var app = require('./app');
 var fs = require('fs');
-var debug = require('debug')('basic_server:server');
+var debug = require('debug')(process.env.APPNAME + ':server');
 var http = require('http');
 var Primus = require('primus.io');
 
@@ -46,7 +41,7 @@ app.use(function(err, req, res, next) {
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT);
+var port = process.env.PORT;
 app.set('port', port);
 
 /**
@@ -103,26 +98,6 @@ web.on("connection", function(spark) {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
 
 /**
  * Event listener for HTTP server "error" event.

@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.sendFile('./public/index.html');
-});
+router.use(require('./login'));
 
-router.get('/dashboard', function(req, res, next) {
-  res.sendFile('./public/dashboard.html');
+router.get('/', function(request, response, next) {
+	return response.render('homepage', {});
+	/*if (request.user) {
+		return response.redirect('/restricted');
+	} else {
+		return response.redirect('/login');
+	}*/
 });
 
 module.exports = router;

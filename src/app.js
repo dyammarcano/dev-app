@@ -19,14 +19,16 @@ app.use(cors());
 app.use(compress());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public_html')));
 
-app.use('*', function(req, res, next) {
+/*app.use('*', function(req, res, next) {
   req.sample = 'hello world';
   next();
-});
+});*/
 
 app.use('/', routes);
 //app.use('/users', users);
